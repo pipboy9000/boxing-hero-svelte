@@ -1,0 +1,41 @@
+<script>
+  import Router from "svelte-spa-router";
+  import { routes } from "./routes.js";
+</script>
+
+<style>
+  :global(body) {
+    background: url("../images/leather.jpg");
+    background-size: contain;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: "Rubik", sans-serif;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    user-select: none;
+  }
+
+  :global(html) {
+    padding: 0;
+    margin: 0;
+    max-height: 100vh;
+    overflow: hidden;
+  }
+
+  :global(button) {
+    outline: none;
+  }
+
+  @font-face {
+    font-family: Rubik;
+    src: url("../fonts/Rubik-Bold.ttf");
+  }
+</style>
+
+<Router {routes} />
