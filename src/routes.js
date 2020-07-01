@@ -3,5 +3,5 @@ import NormalGame from './NormalGame.svelte';
 
 export const routes = {
     '/': Menu,
-    '/normal': NormalGame
+    '/game': NormalGame
 }
