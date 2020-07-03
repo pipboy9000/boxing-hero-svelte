@@ -36,7 +36,7 @@
     // hitTarget = Calibrate.getHitTarget();
     hpBar.style.width = "100%";
     hpColor.style.backgroundColor = "#62ff00";
-    msg = "Get Ready!!";
+    msg = "Get Ready!dddeee!";
     window.addEventListener("devicemotion", hit, true);
   }
 
