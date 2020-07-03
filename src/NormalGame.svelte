@@ -16,12 +16,14 @@
   let msg;
   let timer;
   let onTimerEnd;
+  let timerHidden = false;
 
   let level;
   let hp;
   let maxHp;
 
   let hitTarget = 10;
+  let minHit = 2;
   let hitWait = 0;
 
   function newGame() {
@@ -46,7 +48,7 @@
     hpColor.style.backgroundColor = "#62ff00";
     msg = "GO!!!";
     onTimerEnd = gameOver;
-    timer.setTime(30 + level * 3);
+    timer.setTime(10 + level * 3);
     level++;
   }
 
@@ -87,8 +89,8 @@
         hpNormalized * 120
       )},100%,60%)`;
 
-      Effects.spawnParticles(5, x, y);
-      Effects.flash(0.2);
+      // Effects.spawnParticles(5, x, y);
+      // Effects.flash(0.2);
 
       if (hp == 0) {
         getReady();
@@ -105,7 +107,7 @@
   });
 
   onDestroy(() => {
-    console.log("game over");
+    gameOver();
   });
 </script>
 
@@ -118,14 +120,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  }
-
-  .game > .container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
   }
 
   .level {
@@ -142,8 +136,14 @@
   }
 
   .hpContainer {
-    width: 95%;
+    width: 100%;
     height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   .hp {
@@ -192,13 +192,6 @@
     transition: opacity 0.5s ease-out;
     outline: none;
   }
-
-  .effects {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    pointer-events: none;
-  }
 </style>
 
 <div class="game">
@@ -208,8 +201,13 @@
   {/if}
   <div class="msg">{msg}</div>
   <div class="middle">
-    <button hidden={state != STATE.GameOver} class="restartBtn">Restart</button>
-    <Timer bind:this={timer} on:end={timerEnded} />
+    {#if state == STATE.GameOver}
+      <button class="restartBtn" on:click={newGame}>Restart</button>
+    {/if}
+    <Timer
+      bind:this={timer}
+      on:end={timerEnded}
+      hidden={state == STATE.GameOver} />
   </div>
   <div class="hpContainer">
     <div class="hp" bind:this={hpBar}>

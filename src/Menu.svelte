@@ -19,7 +19,7 @@
     flex-direction: column;
     width: 100%;
     height: 100%;
-    max-height: 40vh;
+    max-height: 50vh;
     max-width: 330px;
     overflow: auto;
     scroll-behavior: smooth;

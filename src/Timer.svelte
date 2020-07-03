@@ -2,6 +2,8 @@
   import { createEventDispatcher } from "svelte";
   import { tick } from "svelte";
 
+  export let hidden = true;
+
   const dispatch = createEventDispatcher();
 
   let time = 0;
@@ -10,9 +12,7 @@
 
   let circle;
 
-  export async function setTime(seconds) {
-    if (timerInterval) clearInterval(timerInterval);
-
+  export function setTime(seconds) {
     time = seconds;
 
     circle.style.transition = "";
@@ -30,7 +30,7 @@
 
     console.log(time);
 
-    timerInterval = setTimeout(timeTick, 1000);
+    setTimeout(timeTick, 1000);
   }
 
   function timeTick() {
@@ -38,7 +38,7 @@
     if (time == 0) {
       dispatch("end");
     } else {
-      timerInterval = setTimeout(timeTick, 1000);
+      setTimeout(timeTick, 1000);
     }
   }
 </script>
@@ -70,7 +70,7 @@
   }
 </style>
 
-<div class="timer">
+<div class="timer" style="display:{hidden ? 'none' : 'flex'}">
   <div class="timerSeconds">{time}</div>
   <svg width="110" height="110">
     <circle

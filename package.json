@@ -4,7 +4,8 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public"
+    "start_old": "sirv public --host 0.0.0.0",
+    "start": "cd ./public && live-server --https=./live-server-https"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^12.0.0",
@@ -16,6 +17,7 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
+    "live-server-https": "0.0.2",
     "sirv-cli": "^0.4.4",
     "svelte-spa-router": "^2.2.0"
   }
