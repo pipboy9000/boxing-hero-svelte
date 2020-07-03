@@ -13,6 +13,7 @@
   let circle;
 
   export function setTime(seconds) {
+    debugger;
     time = seconds;
 
     circle.style.transition = "";
@@ -27,8 +28,6 @@
         "s linear";
       circle.style.strokeDashoffset = -99;
     }, 50);
-
-    console.log(time);
 
     setTimeout(timeTick, 1000);
   }

@@ -1,6 +1,16 @@
 <script>
+  import { onMount, onDestroy } from "svelte";
   import Router from "svelte-spa-router";
   import { routes } from "./routes.js";
+  import { push, pop, replace, location } from "svelte-spa-router";
+
+  onMount(async () => {
+    let page = $location.split("/")[1];
+    if (page) {
+      await replace("/");
+      push("/" + page);
+    }
+  });
 </script>
 
 <style>

@@ -36,11 +36,12 @@
     // hitTarget = Calibrate.getHitTarget();
     hpBar.style.width = "100%";
     hpColor.style.backgroundColor = "#62ff00";
-    msg = "Get Ready!dddeee!";
+    msg = "Get Ready!s!";
     window.addEventListener("devicemotion", hit, true);
   }
 
   function nextLevel() {
+    if (state == STATE.GameOver) return;
     state = STATE.Playing;
     maxHp = 45 + level * 5;
     hp = maxHp;
@@ -69,8 +70,6 @@
     let z = event.acceleration.z;
 
     let hit = Math.sqrt(x * x + y * y + z * z); //movement vector length
-
-    console.log(hit, hitWait);
 
     if (state == STATE.Playing) {
       hitWait = 15;
