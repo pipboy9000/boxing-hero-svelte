@@ -13,7 +13,6 @@
   let circle;
 
   export function setTime(seconds) {
-    debugger;
     time = seconds;
 
     circle.style.transition = "";

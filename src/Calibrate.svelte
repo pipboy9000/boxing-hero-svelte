@@ -1,87 +1,89 @@
 <script>
   import { onMount, onDestroy } from "svelte";
   import { pop } from "svelte-spa-router";
+  import { hitTarget } from "./store.js";
 
-  //   slider.oninput = e => {
-  //     hitTarget = 31 - +e.target.value;
-  //     localStorage.setItem("hitTarget", hitTarget);
-  //   };
+  let hitLevel;
+  let hitWait = 0;
+  let greenWait = 0;
+  let active;
 
-  //for testing
-  // calibrateDiv.onclick = e => {
-  //     let event = {
-  //         acceleration: {
-  //             x: 10,
-  //             y: 0,
-  //             z: 0,
-  //         }
-  //     }
+  let hitCircle;
+  let hitRing;
 
-  //     hit(event);
-  //     hitWait = 0;
-  //     setTimeout(() => {
-  //         greenWait = 0;
-  //     }, 500)
-  // }
+  onMount(async () => {
+    window.addEventListener("devicemotion", hit, true);
+    active = true;
+    render();
+  });
 
-  //   let hitTarget = parseInt(localStorage.getItem("hitTarget") || 10);
-  //   slider.value = 31 - hitTarget;
-  //   let hitLevel = 0;
-  //   let active = false;
-  //   let hitWait = 0; //frames to wait before registering another hit
-  //   let greenWait = 0; //frames to wait before clearing green ring color
+  onDestroy(() => {
+    window.removeEventListener("devicemotion", hit, true);
+    active = false;
+  });
 
-  //   function hit(event) {
-  //     let x = event.acceleration.x;
-  //     let y = event.acceleration.y;
-  //     let z = event.acceleration.z;
+  function testHit() {
+    let event = {
+      acceleration: {
+        x: 10 + (Math.random() * 10 - 5),
+        y: 0,
+        z: 0
+      }
+    };
 
-  //     let v = Math.sqrt(x * x + y * y + z * z); //movement vector length
+    hit(event);
+    hitWait = 0;
+    setTimeout(() => {
+      greenWait = 0;
+    }, 500);
+  }
 
-  //     if (v > 2) {
-  //       hitLevel = v;
-  //       hitWait = 10;
+  function hit(event) {
+    let x = event.acceleration.x;
+    let y = event.acceleration.y;
+    let z = event.acceleration.z;
 
-  //       let n = v / hitTarget; //normalize with hitTarget
-  //       console.log(n);
-  //       if (n > 0.9 && n < 1.1) {
-  //         greenWait = 30;
-  //       }
-  //     }
+    let v = Math.sqrt(x * x + y * y + z * z); //movement vector length
 
-  //     greenWait--;
-  //   }
+    if (v > 2) {
+      hitLevel = v;
+      hitWait = 10;
 
-  //   function render() {
-  //     console.log("calibrate render");
-  //     let n = hitLevel / hitTarget;
+      let n = v / (31 - $hitTarget); //normalize with hitTarget
 
-  //     if (greenWait > 28) {
-  //       hitCircle.style.transform = `scale(1)`;
-  //     } else {
-  //       hitCircle.style.transform = `scale(${n})`;
-  //     }
+      if (n > 0.9 && n < 1.1) {
+        greenWait = 30;
+      }
+    }
+    greenWait--;
+  }
 
-  //     if (greenWait > 0) {
-  //       hitRing.style.border = "5px solid #1dff4f";
-  //     } else {
-  //       hitRing.style.border = "";
-  //     }
+  function render() {
+    if (!active) return;
+    let n = hitLevel / (31 - $hitTarget);
 
-  //     hitLevel *= 0.875;
+    if (greenWait > 28) {
+      hitCircle.style.transform = `scale(1)`;
+    } else if (n > 0.01) {
+      hitCircle.style.transform = `scale(${n})`;
+    } else {
+      hitCircle.style.transform = `scale(0)`;
+    }
 
-  //     if (hitWait > 0) {
-  //       hitWait--;
-  //     }
+    if (greenWait > 0) {
+      hitRing.style.border = "5px solid #1dff4f";
+    } else {
+      hitRing.style.border = "";
+    }
 
-  //     if (active) {
-  //       requestAnimationFrame(render);
-  //     }
-  //   }
+    hitLevel *= 0.875;
 
-  //   function getHitTarget() {
-  //     return hitTarget;
-  //   }
+    if (hitWait > 0) {
+      hitWait--;
+    }
+
+    requestAnimationFrame(render);
+  }
 </script>
 
 <style>
@@ -103,16 +105,7 @@
     align-items: center;
   }
 
-  .hitRing {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .hitRing > img {
+  .hit > img {
     border-radius: 1000px;
     width: 70%;
     max-width: 300px;
@@ -145,19 +138,18 @@
     margin-left: 10px;
     margin-right: 10px;
     width: 60%;
+    font-size: 5px;
   }
 </style>
 
-<div class="calibrate">
+<div class="calibrate" on:click={testHit}>
   <div class="hit">
-    <div class="hitRing">
-      <div class="hitCircle" />
-      <img src="images/glove.png" alt="Hit Me!" />
-    </div>
+    <div class="hitCircle" bind:this={hitCircle} />
+    <img src="images/glove.png" alt="Hit Me!" bind:this={hitRing} />
   </div>
   <div class="slider">
     -
-    <input type="range" min="1" max="30" step="1" value="15" />
+    <input type="range" min="1" max="30" step="1" bind:value={$hitTarget} />
     +
   </div>
   <div class="backBtn">X</div>
