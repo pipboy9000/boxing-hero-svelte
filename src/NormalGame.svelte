@@ -17,6 +17,7 @@
   let hpColor;
   let msg;
   let score;
+  let scoreComp;
   let timer;
   let onTimerEnd;
   let timerHidden = false;
@@ -37,6 +38,7 @@
     hpColor.style.backgroundColor = "#62ff00";
     window.addEventListener("devicemotion", hit, true);
     getReady();
+    scoreComp.reset();
   }
 
   function getReady() {
@@ -45,7 +47,8 @@
     hpBar.style.width = "100%";
     hpColor.style.backgroundColor = "#62ff00";
     onTimerEnd = nextLevel;
-    timer.setTime(3);
+    timer.setTime(1);
+    level++;
   }
 
   function nextLevel() {
@@ -56,7 +59,6 @@
     msg = "GO!!!";
     onTimerEnd = gameOver;
     timer.setTime(10 + level * 3);
-    level++;
   }
 
   function gameOver() {
@@ -141,7 +143,9 @@
   .level {
     color: white;
     font-size: 30px;
+    height: 40px;
     text-shadow: 0 5px 3px black;
+    margin-top: 20px;
   }
 
   .msg {
@@ -179,7 +183,7 @@
   }
 
   .middle {
-    height: 130px;
+    height: 100%;
     width: 100%;
     justify-content: center;
     align-items: center;
@@ -210,10 +214,11 @@
   }
 
   .texts {
-    height: 30%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
   }
 
   .backBtn {
@@ -226,22 +231,26 @@
 
   .bottom {
     width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .score {
+    font-size: 30px;
+    color: white;
+    text-align: center;
   }
 </style>
 
 <div class="game" on:click={testHit}>
   <div class="texts">
-    {#if level > 0}
-      <div class="level">Level {level}</div>
-    {/if}
-    {#if score > 0}
-      <div class="score">
-        Score:
-        <Score {score} />
-      </div>
-    {:else}
-      <div class="msg">{msg}</div>
-    {/if}
+    <div class="level">Level {level == 0 ? 1 : level}</div>
+    <div class="msg">{msg}</div>
+    <div class="score">
+      Score:
+      <Score {score} bind:this={scoreComp} />
+    </div>
   </div>
   <div class="middle">
     {#if state == STATE.GameOver}
