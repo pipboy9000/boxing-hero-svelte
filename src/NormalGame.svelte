@@ -4,6 +4,7 @@
   import Timer from "./Timer.svelte";
   import { hitTarget } from "./store.js";
   import Score from "./Score.svelte";
+  import { fade } from "svelte/transition";
 
   const STATE = {
     GetReady: 0,
@@ -180,6 +181,7 @@
       -3px -4px 2px #909090 inset;
     transition: width 0.5s;
     border-radius: 7px;
+    position: relative;
   }
 
   .middle {
@@ -197,6 +199,7 @@
     mix-blend-mode: multiply;
     transition: background-color 0.3s ease-out;
     border-radius: 7px;
+    position: absolute;
   }
 
   .restartBtn {
@@ -211,6 +214,7 @@
     font-family: "Rubik", sans-serif;
     transition: opacity 0.5s ease-out;
     outline: none;
+    margin: 0;
   }
 
   .texts {
@@ -241,6 +245,31 @@
     color: white;
     text-align: center;
   }
+
+  .barHighlight {
+    position: absolute;
+    width: 100%;
+    height: 64%;
+    background: white;
+    top: 0;
+    right: 0;
+    border-radius: 3px;
+    opacity: 1.5;
+    background: linear-gradient(
+      90deg,
+      #ffffff00,
+      #ffffff8a 75%,
+      #ffffff47 100%
+    );
+    box-sizing: border-box;
+    mix-blend-mode: overlay;
+  }
+
+  /* @media screen and (max-height: 460px) {
+    .middle {
+      height: 230px;
+    }
+  } */
 </style>
 
 <div class="game" on:click={testHit}>
@@ -254,7 +283,9 @@
   </div>
   <div class="middle">
     {#if state == STATE.GameOver}
-      <button class="restartBtn" on:click={newGame}>Restart</button>
+      <button class="restartBtn" on:click={newGame} transition:fade>
+        Restart
+      </button>
     {/if}
     <Timer
       bind:this={timer}
@@ -265,6 +296,7 @@
     <div class="hpContainer">
       <div class="hp" bind:this={hpBar}>
         <div class="hpColor" bind:this={hpColor} />
+        <div class="barHighlight" />
       </div>
     </div>
   </div>

@@ -69,6 +69,15 @@
     stroke: white;
     transition: opacity 0.5s;
   }
+
+  @media screen and (max-height: 460px) {
+    .timer {
+      position: fixed;
+      left: 10px;
+      top: 20px;
+      display: none;
+    }
+  }
 </style>
 
 <div class="timer" style="display:{hidden ? 'none' : 'flex'}">
