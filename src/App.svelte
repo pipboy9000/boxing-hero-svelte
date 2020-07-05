@@ -26,7 +26,7 @@
     padding: 0;
     white-space: nowrap;
     width: 100vw;
-    height: 100vh;
+    min-height: -webkit-fill-available;
     overflow: hidden;
     user-select: none;
   }

@@ -3,6 +3,8 @@
   import { pop } from "svelte-spa-router";
   import { hitTarget } from "./store.js";
 
+  let slider;
+
   let hitLevel;
   let hitWait = 0;
   let greenWait = 0;
@@ -14,6 +16,7 @@
   onMount(async () => {
     window.addEventListener("devicemotion", hit, true);
     active = true;
+    slider.value = 31 - $hitTarget;
     render();
   });
 
@@ -21,6 +24,10 @@
     window.removeEventListener("devicemotion", hit, true);
     active = false;
   });
+
+  function setHitTarget(e) {
+    hitTarget.set(31 - e.target.value);
+  }
 
   function testHit() {
     let event = {
@@ -49,7 +56,7 @@
       hitLevel = v;
       hitWait = 10;
 
-      let n = v / (31 - $hitTarget); //normalize with hitTarget
+      let n = v / $hitTarget; //normalize with hitTarget
 
       if (n > 0.9 && n < 1.1) {
         greenWait = 30;
@@ -60,7 +67,7 @@
 
   function render() {
     if (!active) return;
-    let n = hitLevel / (31 - $hitTarget);
+    let n = hitLevel / $hitTarget;
 
     if (greenWait > 28) {
       hitCircle.style.transform = `scale(1)`;
@@ -140,6 +147,14 @@
     width: 60%;
     font-size: 5px;
   }
+
+  .backBtn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 20px;
+    color: white;
+  }
 </style>
 
 <div class="calibrate" on:click={testHit}>
@@ -149,8 +164,20 @@
   </div>
   <div class="slider">
     -
-    <input type="range" min="1" max="30" step="1" bind:value={$hitTarget} />
+    <input
+      type="range"
+      min="1"
+      max="30"
+      step="1"
+      on:change={setHitTarget}
+      bind:this={slider} />
     +
   </div>
-  <div class="backBtn">X</div>
+  <div
+    class="backBtn"
+    on:click={() => {
+      pop();
+    }}>
+    X
+  </div>
 </div>

@@ -1,4 +1,6 @@
 <script>
+  import { onMount, onDestroy } from "svelte";
+
   let particles = [];
 
   let canvas, ctx;
@@ -8,6 +10,14 @@
   let PARTICLE_MAX_AGE = 20;
 
   let flashAmount = 0;
+
+  function initSize() {}
+
+  onMount(() => {
+    ctx = canvas.getContext("2d");
+    canvas.width = width;
+    canvas.height = height;
+  });
 
   function clear() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -127,4 +137,4 @@
   }
 </style>
 
-<canvas class="effects" />
+<canvas class="effects" bind:this={canvas} />

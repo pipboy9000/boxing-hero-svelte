@@ -13,12 +13,15 @@
   let circle;
 
   export function setTime(seconds) {
+    if (timerInterval) clearInterval(timerInterval);
+
     time = seconds;
 
     circle.style.transition = "";
     circle.style.strokeDashoffset = 0;
 
     setTimeout(() => {
+      if (!circle) return;
       circle.style.transition =
         "stroke-dashoffset " +
         seconds +
@@ -28,7 +31,7 @@
       circle.style.strokeDashoffset = -99;
     }, 50);
 
-    setTimeout(timeTick, 1000);
+    timerInterval = setTimeout(timeTick, 1000);
   }
 
   function timeTick() {
@@ -36,7 +39,7 @@
     if (time == 0) {
       dispatch("end");
     } else {
-      setTimeout(timeTick, 1000);
+      timerInterval = setTimeout(timeTick, 1000);
     }
   }
 </script>

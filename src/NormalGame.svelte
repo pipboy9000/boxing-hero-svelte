@@ -2,6 +2,8 @@
   import { onMount, onDestroy } from "svelte";
   import { pop } from "svelte-spa-router";
   import Timer from "./Timer.svelte";
+  import { hitTarget } from "./store.js";
+  import Score from "./Score.svelte";
 
   const STATE = {
     GetReady: 0,
@@ -14,30 +16,36 @@
   let hpBar;
   let hpColor;
   let msg;
+  let score;
   let timer;
   let onTimerEnd;
   let timerHidden = false;
 
   let level;
   let hp;
-  let maxHp;
 
-  let hitTarget = 10;
+  let maxHp;
   let minHit = 2;
   let hitWait = 0;
 
   function newGame() {
-    state = STATE.GetReady;
+    score = 0;
     hp = 45;
     maxHp = 45;
     level = 0;
-    onTimerEnd = nextLevel;
-    timer.setTime(3);
-    // hitTarget = Calibrate.getHitTarget();
     hpBar.style.width = "100%";
     hpColor.style.backgroundColor = "#62ff00";
-    msg = "Get Ready!s!";
     window.addEventListener("devicemotion", hit, true);
+    getReady();
+  }
+
+  function getReady() {
+    state = STATE.GetReady;
+    msg = "Get Ready!!";
+    hpBar.style.width = "100%";
+    hpColor.style.backgroundColor = "#62ff00";
+    onTimerEnd = nextLevel;
+    timer.setTime(3);
   }
 
   function nextLevel() {
@@ -45,8 +53,6 @@
     state = STATE.Playing;
     maxHp = 45 + level * 5;
     hp = maxHp;
-    hpBar.style.width = "100%";
-    hpColor.style.backgroundColor = "#62ff00";
     msg = "GO!!!";
     onTimerEnd = gameOver;
     timer.setTime(10 + level * 3);
@@ -76,9 +82,11 @@
 
       if (hit < minHit) return;
 
-      hit /= hitTarget; //calibrate
+      hit /= $hitTarget; //calibrate
 
       hp -= hit;
+
+      score += hit * 100;
 
       if (hp < 0) hp = 0;
 
@@ -97,10 +105,6 @@
     }
   }
 
-  function timerEnded() {
-    onTimerEnd();
-  }
-
   onMount(() => {
     newGame();
   });
@@ -108,6 +112,19 @@
   onDestroy(() => {
     gameOver();
   });
+
+  function testHit() {
+    let event = {
+      acceleration: {
+        x: 10 + (Math.random() * 10 - 5),
+        y: 0,
+        z: 0
+      }
+    };
+
+    hit(event);
+    hitWait = 0;
+  }
 </script>
 
 <style>
@@ -191,26 +208,55 @@
     transition: opacity 0.5s ease-out;
     outline: none;
   }
+
+  .texts {
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .backBtn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 20px;
+    color: white;
+  }
+
+  .bottom {
+    width: 100%;
+  }
 </style>
 
-<div class="game">
-  <!-- <canvas class="effects" /> -->
-  {#if level > 0}
-    <div class="level">Level {level}</div>
-  {/if}
-  <div class="msg">{msg}</div>
+<div class="game" on:click={testHit}>
+  <div class="texts">
+    {#if level > 0}
+      <div class="level">Level {level}</div>
+    {/if}
+    {#if score > 0}
+      <div class="score">
+        Score:
+        <Score {score} />
+      </div>
+    {:else}
+      <div class="msg">{msg}</div>
+    {/if}
+  </div>
   <div class="middle">
     {#if state == STATE.GameOver}
       <button class="restartBtn" on:click={newGame}>Restart</button>
     {/if}
     <Timer
       bind:this={timer}
-      on:end={timerEnded}
+      on:end={onTimerEnd}
       hidden={state == STATE.GameOver} />
   </div>
-  <div class="hpContainer">
-    <div class="hp" bind:this={hpBar}>
-      <div class="hpColor" bind:this={hpColor} />
+  <div class="bottom">
+    <div class="hpContainer">
+      <div class="hp" bind:this={hpBar}>
+        <div class="hpColor" bind:this={hpColor} />
+      </div>
     </div>
   </div>
   <div class="backBtn" on:click={() => pop()}>X</div>
