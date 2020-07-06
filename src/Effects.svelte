@@ -1,6 +1,8 @@
 <script>
   import { onMount, onDestroy } from "svelte";
 
+  let active = false;
+
   let particles = [];
 
   let canvas, ctx;
@@ -14,22 +16,31 @@
   function initSize() {}
 
   onMount(() => {
+    active = true;
     ctx = canvas.getContext("2d");
     canvas.width = width;
     canvas.height = height;
+
+    initParticles();
+
+    requestAnimationFrame(render);
+  });
+
+  onDestroy(() => {
+    active = false;
   });
 
   function clear() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 
-  function spawnParticles(amount, vx, vy) {
+  export function spawnParticles(amount, vx, vy) {
     for (let i = 0; i < amount; i++) {
       let p = particles.find(p => !p.active);
       if (!p) return;
 
-      p.x = width / 2 + vx * Math.random() * 30;
-      p.y = height / 2 + vy * Math.random() * 30;
+      p.x = width / 2 + vx * Math.random() * 70;
+      p.y = height / 2 + vy * Math.random() * 70;
       p.vx = vx + Math.random() * 20 - 10;
       p.vy = vy + Math.random() * 20 - 10;
       p.active = true;
@@ -43,8 +54,8 @@
         p.x += p.vx;
         p.y += p.vy;
 
-        p.vx *= 0.96;
-        p.vy = p.vy * 0.98 + 2;
+        p.vx *= 0.92;
+        p.vy = p.vy * 0.92 + 3;
         p.age += 1;
 
         if (p.age > PARTICLE_MAX_AGE) {
@@ -83,7 +94,7 @@
 
   function drawFlash() {
     if (flashAmount > 0) {
-      flashAmount *= 0.87;
+      flashAmount *= 0.93;
       if (flashAmount < 0.01) {
         flashAmount = 0;
       }
@@ -92,8 +103,9 @@
     ctx.fillRect(0, 0, width, height);
   }
 
-  function flash(amount) {
-    flashAmount = amount;
+  export function flash(amount) {
+    flashAmount += amount;
+    console.log(flashAmount);
   }
 
   function test() {
@@ -103,18 +115,6 @@
     spawnParticles(5, vx, vy);
   }
 
-  function init() {
-    canvas = document.getElementsByClassName("effects")[0];
-    canvas.addEventListener("click", test, false);
-    ctx = canvas.getContext("2d");
-    canvas.width = width;
-    canvas.height = height;
-
-    initParticles();
-
-    requestAnimationFrame(render);
-  }
-
   function render() {
     moveParticles();
 
@@ -122,10 +122,8 @@
     drawFlash();
     drawParticles();
 
-    requestAnimationFrame(render);
+    if (active) requestAnimationFrame(render);
   }
-
-  init();
 </script>
 
 <style>

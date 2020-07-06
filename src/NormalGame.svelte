@@ -6,6 +6,7 @@
   import Score from "./Score.svelte";
   import { fade } from "svelte/transition";
   import GameOver from "./GameOver.svelte";
+  import Effects from "./Effects.svelte";
 
   const STATE = {
     GetReady: 0,
@@ -25,6 +26,8 @@
   let timer;
   let onTimerEnd;
   let timerHidden = false;
+
+  let effects;
 
   let level;
   let hp;
@@ -62,7 +65,7 @@
     hp = maxHp;
     msg = "GO!!!";
     onTimerEnd = gameOver;
-    timer.setTime(3 + (level - 1) * 3);
+    timer.setTime(10 + (level - 1) * 3);
   }
 
   function gameOver() {
@@ -102,8 +105,8 @@
         hpNormalized * 120
       )},100%,60%)`;
 
-      // Effects.spawnParticles(5, x, y);
-      // Effects.flash(0.2);
+      effects.spawnParticles(5, x, y);
+      effects.flash(0.2);
 
       if (hp == 0) {
         getReady();
@@ -122,9 +125,9 @@
   function testHit() {
     let event = {
       acceleration: {
-        x: 10 + (Math.random() * 10 - 5),
-        y: 0,
-        z: 0
+        x: Math.random() * 10 - 5,
+        y: Math.random() * 10 - 5,
+        z: Math.random() * 10 - 5
       }
     };
 
@@ -224,14 +227,14 @@
   .bottom {
     width: 100%;
     height: 100%;
-    display: flex;
-    align-items: center;
+    margin-top: 20px;
   }
 
   .score {
     font-size: 30px;
     color: white;
     text-align: center;
+    text-shadow: 0px 5px 5px black;
   }
 
   .barHighlight {
@@ -267,6 +270,7 @@
 </style>
 
 <div class="game" on:click={testHit}>
+  <Effects bind:this={effects} />
   <div class="texts">
     <div class="level">Level {level == 0 ? 1 : level}</div>
     <div class="msg">{msg}</div>

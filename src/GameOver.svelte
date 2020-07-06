@@ -90,7 +90,7 @@
 
   h1 {
     margin: 0;
-    font-size: 50px;
+    font-size: 65px;
     text-shadow: 0px 5px 5px black;
   }
 
@@ -139,7 +139,7 @@
     }
   }
 
-  @media screen and (min-height: 500px) {
+  @media screen and (min-height: 400px) {
     h1 {
       margin-top: 20px;
       font-size: 80px;
