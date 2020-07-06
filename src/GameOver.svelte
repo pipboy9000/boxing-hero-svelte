@@ -44,8 +44,8 @@
 
   $: {
     if (score > topScore) {
-      setTopScore();
       topScore = score;
+      setTopScore();
     }
   }
 
@@ -143,6 +143,13 @@
     h1 {
       margin-top: 20px;
       font-size: 80px;
+    }
+  }
+
+  @media screen and (max-width: 470px) {
+    h1 {
+      margin-top: 20px;
+      font-size: 50px;
     }
   }
 </style>
