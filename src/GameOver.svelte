@@ -27,7 +27,6 @@
   }
 
   function setTopScore() {
-    console.log("set top score");
     switch (gameType) {
       case "normal":
         localStorage.setItem("topScoreNormal", topScore);

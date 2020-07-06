@@ -39,6 +39,7 @@
 
   function newGame() {
     score = 0;
+    combo = 0;
     hp = 45;
     maxHp = 45;
     level = 0;
@@ -86,8 +87,7 @@
     }
     comboTimout = setTimeout(() => {
       combo = 0;
-    }, 250);
-
+    }, 500);
     combo++;
 
     let x = event.acceleration.x;
@@ -105,7 +105,11 @@
 
       hp -= hit;
 
-      score += hit * 100;
+      let scoreToAdd = hit * 100;
+      if (combo > 2) scoreToAdd *= combo - 1;
+      score += scoreToAdd;
+
+      console.log(scoreToAdd);
 
       if (hp < 0) hp = 0;
 
@@ -292,7 +296,7 @@
     <div class="msg">{msg}</div>
     <div class="score">
       Score:
-      <Score {score} bind:this={scoreComp} />
+      <Score {score} bind:this={scoreComp} {combo} />
     </div>
   </div>
   <div class="middle">

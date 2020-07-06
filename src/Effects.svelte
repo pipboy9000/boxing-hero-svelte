@@ -105,7 +105,6 @@
 
   export function flash(amount) {
     flashAmount += amount;
-    console.log(flashAmount);
   }
 
   function test() {
