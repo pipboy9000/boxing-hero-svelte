@@ -87,7 +87,7 @@
     }
     comboTimout = setTimeout(() => {
       combo = 0;
-    }, 500);
+    }, 400);
     combo++;
 
     let x = event.acceleration.x;
