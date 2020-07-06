@@ -25,8 +25,6 @@
   let timer;
   let onTimerEnd;
   let timerHidden = false;
-  let combo = 0;
-  let comboTimout;
 
   let effects;
 
@@ -79,16 +77,6 @@
       hitWait--;
       return;
     }
-
-    //combo
-    if (comboTimout) {
-      clearInterval(comboTimout);
-    }
-    comboTimout = setTimeout(() => {
-      combo = 0;
-    }, 250);
-
-    combo++;
 
     let x = event.acceleration.x;
     let y = event.acceleration.y;

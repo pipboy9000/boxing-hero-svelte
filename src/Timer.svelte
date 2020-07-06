@@ -73,7 +73,7 @@
   @media screen and (max-height: 460px) {
     .timer {
       position: fixed;
-      left: 10px;
+      left: 20px;
       top: 20px;
       display: none;
     }

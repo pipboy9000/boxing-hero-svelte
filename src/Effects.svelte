@@ -39,10 +39,10 @@
       let p = particles.find(p => !p.active);
       if (!p) return;
 
-      p.x = width / 2 + vx * Math.random() * 70;
-      p.y = height / 2 + vy * Math.random() * 70;
-      p.vx = vx + Math.random() * 20 - 10;
-      p.vy = vy + Math.random() * 20 - 10;
+      p.x = width / 2 + vx * Math.random() * 50;
+      p.y = height / 2 + vy * Math.random() * 50;
+      p.vx = vx + Math.random() * 40 - 20;
+      p.vy = vy + Math.random() * 40 - 20;
       p.active = true;
       p.age = 0;
     }
@@ -54,7 +54,7 @@
         p.x += p.vx;
         p.y += p.vy;
 
-        p.vx *= 0.92;
+        p.vx *= 0.91;
         p.vy = p.vy * 0.92 + 3;
         p.age += 1;
 

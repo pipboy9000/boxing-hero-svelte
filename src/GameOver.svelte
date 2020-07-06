@@ -129,9 +129,10 @@
     }
   }
 
-  @media screen and (max-height: 300px) {
+  @media screen and (max-height: 315px) {
     .score > div {
       font-size: 40px;
+      margin-top: 0;
     }
 
     h2 {
