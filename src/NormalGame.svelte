@@ -5,12 +5,15 @@
   import { hitTarget } from "./store.js";
   import Score from "./Score.svelte";
   import { fade } from "svelte/transition";
+  import GameOver from "./GameOver.svelte";
 
   const STATE = {
     GetReady: 0,
     Playing: 1,
     GameOver: 2
   };
+
+  let gameType = "normal";
 
   let state = STATE.GameOver;
 
@@ -59,11 +62,11 @@
     hp = maxHp;
     msg = "GO!!!";
     onTimerEnd = gameOver;
-    timer.setTime(10 + level * 3);
+    timer.setTime(3 + (level - 1) * 3);
   }
 
   function gameOver() {
-    msg = "Game Over";
+    // msg = "Game Over";
     state = STATE.GameOver;
     window.removeEventListener("devicemotion", hit, true);
   }
@@ -202,21 +205,6 @@
     position: absolute;
   }
 
-  .restartBtn {
-    position: absolute;
-    width: 200px;
-    height: 60px;
-    font-size: 25px;
-    border-radius: 50px;
-    border: 5px solid white;
-    background: transparent;
-    color: white;
-    font-family: "Rubik", sans-serif;
-    transition: opacity 0.5s ease-out;
-    outline: none;
-    margin: 0;
-  }
-
   .texts {
     height: 100%;
     display: flex;
@@ -256,20 +244,26 @@
     border-radius: 3px;
     opacity: 1.5;
     background: linear-gradient(
-      90deg,
-      #ffffff00,
-      #ffffff8a 75%,
-      #ffffff47 100%
+      25deg,
+      #ffffff,
+      #fff0,
+      #ffffffd4 80%,
+      #fff0 87%,
+      #ffffffc7 100%
     );
     box-sizing: border-box;
     mix-blend-mode: overlay;
   }
 
-  /* @media screen and (max-height: 460px) {
+  @media screen and (max-height: 460px) {
     .middle {
-      height: 230px;
+      height: 0;
     }
-  } */
+
+    .score {
+      margin-top: 15px;
+    }
+  }
 </style>
 
 <div class="game" on:click={testHit}>
@@ -282,11 +276,6 @@
     </div>
   </div>
   <div class="middle">
-    {#if state == STATE.GameOver}
-      <button class="restartBtn" on:click={newGame} transition:fade>
-        Restart
-      </button>
-    {/if}
     <Timer
       bind:this={timer}
       on:end={onTimerEnd}
@@ -301,4 +290,7 @@
     </div>
   </div>
   <div class="backBtn" on:click={() => pop()}>X</div>
+  {#if state == STATE.GameOver}
+    <GameOver on:restart={newGame} bind:gameType {score} />
+  {/if}
 </div>
