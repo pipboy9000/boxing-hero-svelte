@@ -1,8 +1,8 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  import { onMount } from "svelte";
   import { tick } from "svelte";
 
-  export let hidden = true;
   export let gameType = "normal";
 
   const dispatch = createEventDispatcher();
@@ -12,6 +12,10 @@
   let timerInterval;
 
   let circle;
+
+  onMount(() => {
+    dispatch("loaded");
+  });
 
   export function setTime(seconds) {
     if (timerInterval) clearInterval(timerInterval);
@@ -38,6 +42,7 @@
   function timeTick() {
     time--;
     if (time == 0) {
+      debugger;
       dispatch("end");
     } else {
       timerInterval = setTimeout(timeTick, 1000);
@@ -53,7 +58,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: -9999;
   }
 
   .timerSeconds {
@@ -81,15 +85,11 @@
       position: fixed;
       left: 20px;
       top: 20px;
-      display: none;
     }
   }
 </style>
 
-<div
-  class="timer"
-  class:freestyle={gameType == 'freestyle'}
-  style="display:{hidden ? 'none' : 'flex'}">
+<div class="timer" class:freestyle={gameType == 'freestyle'}>
   <div class="timerSeconds">{time}</div>
   <svg width="110" height="110">
     <circle

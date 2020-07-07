@@ -14,16 +14,12 @@
   let flashAmount = 0;
   let flashColor = "255,255,255";
 
-  function initSize() {}
-
   onMount(() => {
     active = true;
     ctx = canvas.getContext("2d");
     canvas.width = width;
     canvas.height = height;
-
     initParticles();
-
     requestAnimationFrame(render);
   });
 
@@ -32,6 +28,7 @@
   });
 
   function clear() {
+    if (!canvas) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 

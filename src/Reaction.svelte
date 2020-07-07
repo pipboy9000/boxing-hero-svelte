@@ -56,7 +56,7 @@
     hpBar.style.width = "100%";
     hpColor.style.backgroundColor = "#62ff00";
     onTimerEnd = nextLevel;
-    timer.setTime(2);
+    timer.setTime(1);
     level++;
   }
 
@@ -73,10 +73,6 @@
   function gameOver() {
     state = STATE.GameOver;
     window.removeEventListener("devicemotion", hit, true);
-  }
-
-  function timerEnd() {
-    onTimerEnd();
   }
 
   function hit(event) {
@@ -243,7 +239,7 @@
     position: absolute;
     top: 15px;
     right: 15px;
-    font-size: 30px;
+    font-size: 20px;
     color: white;
   }
 
@@ -309,7 +305,10 @@
     </div>
   </div>
   <div class="middle">
-    <Timer bind:this={timer} on:end={timerEnd} />
+    <Timer
+      bind:this={timer}
+      on:end={onTimerEnd}
+      hidden={state == STATE.GameOver} />
   </div>
   <div class="bottom">
     <div class="hpContainer">
