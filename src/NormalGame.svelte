@@ -119,8 +119,15 @@
         hpNormalized * 120
       )},100%,60%)`;
 
-      effects.spawnParticles(5, x, y);
-      effects.flash(0.2);
+      effects.spawnParticles(combo > 2 ? 6 : 2, x, y);
+
+      if (combo > 2) {
+        let redLevel = 255 - (combo / 8) * 128;
+        let c = `255,${redLevel},${redLevel}`;
+        effects.flash(0.2, c);
+      } else {
+        effects.flash(0.2, "255,255,255");
+      }
 
       if (hp == 0) {
         getReady();

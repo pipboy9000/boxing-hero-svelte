@@ -12,6 +12,7 @@
   let PARTICLE_MAX_AGE = 20;
 
   let flashAmount = 0;
+  let flashColor = "255,255,255";
 
   function initSize() {}
 
@@ -41,8 +42,8 @@
 
       p.x = width / 2 + vx * Math.random() * 50;
       p.y = height / 2 + vy * Math.random() * 50;
-      p.vx = vx + Math.random() * 40 - 20;
-      p.vy = vy + Math.random() * 40 - 20;
+      p.vx = vx + Math.random() * 10 - 5;
+      p.vy = vy + Math.random() * 10 - 5;
       p.active = true;
       p.age = 0;
     }
@@ -54,8 +55,8 @@
         p.x += p.vx;
         p.y += p.vy;
 
-        p.vx *= 0.91;
-        p.vy = p.vy * 0.92 + 3;
+        p.vx *= 0.96;
+        p.vy = p.vy * 0.96 + 1;
         p.age += 1;
 
         if (p.age > PARTICLE_MAX_AGE) {
@@ -99,11 +100,12 @@
         flashAmount = 0;
       }
     }
-    ctx.fillStyle = `rgba(255,255,255,${flashAmount})`;
+    ctx.fillStyle = `rgba(${flashColor},${flashAmount})`;
     ctx.fillRect(0, 0, width, height);
   }
 
-  export function flash(amount) {
+  export function flash(amount, color) {
+    flashColor = color;
     flashAmount += amount;
   }
 

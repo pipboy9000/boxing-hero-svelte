@@ -3,6 +3,7 @@
   import { tick } from "svelte";
 
   export let hidden = true;
+  export let gameType = "normal";
 
   const dispatch = createEventDispatcher();
 
@@ -29,7 +30,7 @@
         seconds +
         "s linear";
       circle.style.strokeDashoffset = -99;
-    }, 50);
+    }, 100);
 
     timerInterval = setTimeout(timeTick, 1000);
   }
@@ -70,6 +71,11 @@
     transition: opacity 0.5s;
   }
 
+  .freestyle {
+    position: relative;
+    margin-top: 20px;
+  }
+
   @media screen and (max-height: 460px) {
     .timer {
       position: fixed;
@@ -80,7 +86,10 @@
   }
 </style>
 
-<div class="timer" style="display:{hidden ? 'none' : 'flex'}">
+<div
+  class="timer"
+  class:freestyle={gameType == 'freestyle'}
+  style="display:{hidden ? 'none' : 'flex'}">
   <div class="timerSeconds">{time}</div>
   <svg width="110" height="110">
     <circle
