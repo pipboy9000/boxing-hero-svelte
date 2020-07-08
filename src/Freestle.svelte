@@ -22,7 +22,6 @@
   let scoreComp;
   let timer;
   let onTimerEnd;
-  let timerHidden = false;
   let combo = 0;
   let comboTimout;
 
@@ -67,15 +66,6 @@
       return;
     }
 
-    //combo
-    if (comboTimout) {
-      clearInterval(comboTimout);
-    }
-    comboTimout = setTimeout(() => {
-      combo = 0;
-    }, 400);
-    combo++;
-
     let x = event.acceleration.x;
     let y = event.acceleration.y;
     let z = event.acceleration.z;
@@ -95,6 +85,15 @@
 
       effects.spawnParticles(combo > 2 ? 6 : 2, x, y);
 
+      //combo
+      if (comboTimout) {
+        clearInterval(comboTimout);
+      }
+      comboTimout = setTimeout(() => {
+        combo = 0;
+      }, 400);
+      combo++;
+
       if (combo > 2) {
         let redLevel = 255 - (combo / 8) * 128;
         let c = `255,${redLevel},${redLevel}`;
@@ -103,6 +102,10 @@
         effects.flash(0.2, "255,255,255");
       }
     }
+  }
+
+  function timerEnd() {
+    onTimerEnd();
   }
 
   onMount(() => {
@@ -149,7 +152,7 @@
     position: absolute;
     top: 15px;
     right: 15px;
-    font-size: 20px;
+    font-size: 30px;
     color: white;
   }
 
@@ -174,11 +177,7 @@
     Score:
     <Score {score} bind:this={scoreComp} {combo} />
   </div>
-  <Timer
-    {gameType}
-    bind:this={timer}
-    on:end={onTimerEnd}
-    hidden={state == STATE.GameOver} />
+  <Timer {gameType} bind:this={timer} on:end={timerEnd} />
   <div class="backBtn" on:click={() => pop()}>X</div>
   {#if state == STATE.GameOver}
     <GameOver on:restart={newGame} bind:gameType {score} />

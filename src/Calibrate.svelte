@@ -78,7 +78,7 @@
     }
 
     if (greenWait > 0) {
-      hitRing.style.border = "5px solid #1dff4f";
+      hitRing.style.border = "15px solid #1dff4f";
     } else {
       hitRing.style.border = "";
     }
@@ -116,6 +116,7 @@
     border-radius: 1000px;
     width: 70%;
     max-width: 300px;
+    z-index: 2;
   }
 
   .hitCircle {
@@ -127,7 +128,8 @@
     position: absolute;
     background: white;
     border-radius: 1000px;
-    z-index: -999;
+    z-index: 1;
+    /* z-index: -999; */
   }
 
   .slider {
@@ -152,7 +154,7 @@
     position: absolute;
     top: 15px;
     right: 15px;
-    font-size: 20px;
+    font-size: 30px;
     color: white;
   }
 </style>

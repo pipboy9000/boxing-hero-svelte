@@ -56,8 +56,8 @@
     hpBar.style.width = "100%";
     hpColor.style.backgroundColor = "#62ff00";
     onTimerEnd = nextLevel;
-    timer.setTime(2);
     level++;
+    timer.setTime(2);
   }
 
   function nextLevel() {
@@ -85,15 +85,6 @@
       return;
     }
 
-    //combo
-    if (comboTimout) {
-      clearInterval(comboTimout);
-    }
-    comboTimout = setTimeout(() => {
-      combo = 0;
-    }, 400);
-    combo++;
-
     let x = event.acceleration.x;
     let y = event.acceleration.y;
     let z = event.acceleration.z;
@@ -110,6 +101,16 @@
       hp -= hit;
 
       let scoreToAdd = hit * 100;
+
+      //combo
+      if (comboTimout) {
+        clearInterval(comboTimout);
+      }
+      comboTimout = setTimeout(() => {
+        combo = 0;
+      }, 400);
+      combo++;
+
       if (combo > 2) scoreToAdd *= combo - 1;
       score += scoreToAdd;
 

@@ -42,7 +42,6 @@
   function timeTick() {
     time--;
     if (time == 0) {
-      debugger;
       dispatch("end");
     } else {
       timerInterval = setTimeout(timeTick, 1000);
