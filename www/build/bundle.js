@@ -1258,12 +1258,12 @@ var app = (function () {
     const file = "src\\Menu.svelte";
 
     function create_fragment$1(ctx) {
-    	let div6;
+    	let div7;
     	let div0;
     	let t0;
     	let hr0;
     	let t1;
-    	let div5;
+    	let div6;
     	let div1;
     	let t3;
     	let div2;
@@ -1272,30 +1272,35 @@ var app = (function () {
     	let t7;
     	let div4;
     	let t9;
+    	let div5;
+    	let t11;
     	let hr1;
     	let mounted;
     	let dispose;
 
     	const block = {
     		c: function create() {
-    			div6 = element("div");
+    			div7 = element("div");
     			div0 = element("div");
     			t0 = space();
     			hr0 = element("hr");
     			t1 = space();
-    			div5 = element("div");
+    			div6 = element("div");
     			div1 = element("div");
-    			div1.textContent = "New Game";
+    			div1.textContent = "Normal";
     			t3 = space();
     			div2 = element("div");
     			div2.textContent = "Free Style";
     			t5 = space();
     			div3 = element("div");
-    			div3.textContent = "Calibrate";
+    			div3.textContent = "Reaction";
     			t7 = space();
     			div4 = element("div");
-    			div4.textContent = "Options";
+    			div4.textContent = "Calibrate";
     			t9 = space();
+    			div5 = element("div");
+    			div5.textContent = "Options";
+    			t11 = space();
     			hr1 = element("hr");
     			attr_dev(div0, "class", "logo svelte-1ssh224");
     			add_location(div0, file, 100, 2, 2078);
@@ -1304,45 +1309,50 @@ var app = (function () {
     			attr_dev(div1, "class", "item svelte-1ssh224");
     			add_location(div1, file, 103, 4, 2137);
     			attr_dev(div2, "class", "item svelte-1ssh224");
-    			add_location(div2, file, 104, 4, 2206);
+    			add_location(div2, file, 104, 4, 2204);
     			attr_dev(div3, "class", "item svelte-1ssh224");
-    			add_location(div3, file, 105, 4, 2282);
+    			add_location(div3, file, 105, 4, 2280);
     			attr_dev(div4, "class", "item svelte-1ssh224");
-    			add_location(div4, file, 106, 4, 2357);
-    			attr_dev(div5, "class", "items svelte-1ssh224");
-    			add_location(div5, file, 102, 2, 2112);
+    			add_location(div4, file, 106, 4, 2353);
+    			attr_dev(div5, "class", "item svelte-1ssh224");
+    			add_location(div5, file, 107, 4, 2428);
+    			attr_dev(div6, "class", "items svelte-1ssh224");
+    			add_location(div6, file, 102, 2, 2112);
     			attr_dev(hr1, "class", "svelte-1ssh224");
-    			add_location(hr1, file, 108, 2, 2436);
-    			attr_dev(div6, "id", "menu");
-    			attr_dev(div6, "class", "menu svelte-1ssh224");
-    			add_location(div6, file, 99, 0, 2046);
+    			add_location(hr1, file, 109, 2, 2507);
+    			attr_dev(div7, "id", "menu");
+    			attr_dev(div7, "class", "menu svelte-1ssh224");
+    			add_location(div7, file, 99, 0, 2046);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div6, anchor);
-    			append_dev(div6, div0);
-    			append_dev(div6, t0);
-    			append_dev(div6, hr0);
-    			append_dev(div6, t1);
-    			append_dev(div6, div5);
-    			append_dev(div5, div1);
-    			append_dev(div5, t3);
-    			append_dev(div5, div2);
-    			append_dev(div5, t5);
-    			append_dev(div5, div3);
-    			append_dev(div5, t7);
-    			append_dev(div5, div4);
+    			insert_dev(target, div7, anchor);
+    			append_dev(div7, div0);
+    			append_dev(div7, t0);
+    			append_dev(div7, hr0);
+    			append_dev(div7, t1);
+    			append_dev(div7, div6);
+    			append_dev(div6, div1);
+    			append_dev(div6, t3);
+    			append_dev(div6, div2);
+    			append_dev(div6, t5);
+    			append_dev(div6, div3);
+    			append_dev(div6, t7);
+    			append_dev(div6, div4);
     			append_dev(div6, t9);
-    			append_dev(div6, hr1);
+    			append_dev(div6, div5);
+    			append_dev(div7, t11);
+    			append_dev(div7, hr1);
 
     			if (!mounted) {
     				dispose = [
     					listen_dev(div1, "click", /*click_handler*/ ctx[0], false, false, false),
     					listen_dev(div2, "click", /*click_handler_1*/ ctx[1], false, false, false),
     					listen_dev(div3, "click", /*click_handler_2*/ ctx[2], false, false, false),
-    					listen_dev(div4, "click", /*click_handler_3*/ ctx[3], false, false, false)
+    					listen_dev(div4, "click", /*click_handler_3*/ ctx[3], false, false, false),
+    					listen_dev(div5, "click", /*click_handler_4*/ ctx[4], false, false, false)
     				];
 
     				mounted = true;
@@ -1352,7 +1362,7 @@ var app = (function () {
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div6);
+    			if (detaching) detach_dev(div7);
     			mounted = false;
     			run_all(dispose);
     		}
@@ -1380,10 +1390,18 @@ var app = (function () {
     	validate_slots("Menu", $$slots, []);
     	const click_handler = () => push("/game");
     	const click_handler_1 = () => push("/freestyle");
-    	const click_handler_2 = () => push("/calibrate");
-    	const click_handler_3 = () => push("/options");
+    	const click_handler_2 = () => push("/reaction");
+    	const click_handler_3 = () => push("/calibrate");
+    	const click_handler_4 = () => push("/options");
     	$$self.$capture_state = () => ({ push, pop, replace });
-    	return [click_handler, click_handler_1, click_handler_2, click_handler_3];
+
+    	return [
+    		click_handler,
+    		click_handler_1,
+    		click_handler_2,
+    		click_handler_3,
+    		click_handler_4
+    	];
     }
 
     class Menu extends SvelteComponentDev {
@@ -1419,20 +1437,21 @@ var app = (function () {
     			t1 = space();
     			svg = svg_element("svg");
     			circle_1 = svg_element("circle");
-    			attr_dev(div0, "class", "timerSeconds svelte-clmiws");
-    			add_location(div0, file$1, 91, 2, 1745);
-    			attr_dev(circle_1, "class", "timerCircle svelte-clmiws");
+    			attr_dev(div0, "class", "timerSeconds svelte-1lcktqu");
+    			add_location(div0, file$1, 99, 2, 1864);
+    			attr_dev(circle_1, "class", "timerCircle svelte-1lcktqu");
     			attr_dev(circle_1, "cx", "55");
     			attr_dev(circle_1, "cy", "55");
     			attr_dev(circle_1, "r", "50");
     			attr_dev(circle_1, "pathLength", "100");
-    			add_location(circle_1, file$1, 93, 4, 1823);
+    			add_location(circle_1, file$1, 101, 4, 1942);
     			attr_dev(svg, "width", "110");
     			attr_dev(svg, "height", "110");
-    			add_location(svg, file$1, 92, 2, 1787);
-    			attr_dev(div1, "class", "timer svelte-clmiws");
+    			add_location(svg, file$1, 100, 2, 1906);
+    			attr_dev(div1, "class", "timer svelte-1lcktqu");
     			toggle_class(div1, "freestyle", /*gameType*/ ctx[0] == "freestyle");
-    			add_location(div1, file$1, 90, 0, 1680);
+    			toggle_class(div1, "reaction", /*gameType*/ ctx[0] == "reaction");
+    			add_location(div1, file$1, 95, 0, 1750);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1451,6 +1470,10 @@ var app = (function () {
 
     			if (dirty & /*gameType*/ 1) {
     				toggle_class(div1, "freestyle", /*gameType*/ ctx[0] == "freestyle");
+    			}
+
+    			if (dirty & /*gameType*/ 1) {
+    				toggle_class(div1, "reaction", /*gameType*/ ctx[0] == "reaction");
     			}
     		},
     		i: noop,
@@ -1631,10 +1654,10 @@ var app = (function () {
     			t2 = space();
     			div1 = element("div");
     			t3 = text(t3_value);
-    			attr_dev(div0, "class", "combo svelte-2j0y3m");
-    			add_location(div0, file$2, 72, 0, 1411);
-    			attr_dev(div1, "class", "score svelte-2j0y3m");
-    			add_location(div1, file$2, 73, 0, 1471);
+    			attr_dev(div0, "class", "combo svelte-oip6t6");
+    			add_location(div0, file$2, 73, 0, 1428);
+    			attr_dev(div1, "class", "score svelte-oip6t6");
+    			add_location(div1, file$2, 74, 0, 1488);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -3689,17 +3712,454 @@ var app = (function () {
     	}
     }
 
+    /* src\Reaction.svelte generated by Svelte v3.23.2 */
+    const file$8 = "src\\Reaction.svelte";
+
+    // (160:2) {#if state == STATE.GameOver}
+    function create_if_block$3(ctx) {
+    	let gameover;
+    	let updating_gameType;
+    	let current;
+
+    	function gameover_gameType_binding(value) {
+    		/*gameover_gameType_binding*/ ctx[15].call(null, value);
+    	}
+
+    	let gameover_props = { score: /*score*/ ctx[3] };
+
+    	if (/*gameType*/ ctx[0] !== void 0) {
+    		gameover_props.gameType = /*gameType*/ ctx[0];
+    	}
+
+    	gameover = new GameOver({ props: gameover_props, $$inline: true });
+    	binding_callbacks.push(() => bind(gameover, "gameType", gameover_gameType_binding));
+    	gameover.$on("restart", /*newGame*/ ctx[8]);
+
+    	const block = {
+    		c: function create() {
+    			create_component(gameover.$$.fragment);
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(gameover, target, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const gameover_changes = {};
+    			if (dirty & /*score*/ 8) gameover_changes.score = /*score*/ ctx[3];
+
+    			if (!updating_gameType && dirty & /*gameType*/ 1) {
+    				updating_gameType = true;
+    				gameover_changes.gameType = /*gameType*/ ctx[0];
+    				add_flush_callback(() => updating_gameType = false);
+    			}
+
+    			gameover.$set(gameover_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(gameover.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(gameover.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(gameover, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$3.name,
+    		type: "if",
+    		source: "(160:2) {#if state == STATE.GameOver}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$9(ctx) {
+    	let div3;
+    	let effects_1;
+    	let t0;
+    	let div0;
+    	let t1;
+    	let t2;
+    	let div1;
+    	let t3;
+    	let score_1;
+    	let t4;
+    	let timer_1;
+    	let t5;
+    	let div2;
+    	let t7;
+    	let current;
+    	let mounted;
+    	let dispose;
+    	let effects_1_props = {};
+    	effects_1 = new Effects({ props: effects_1_props, $$inline: true });
+    	/*effects_1_binding*/ ctx[11](effects_1);
+    	let score_1_props = { score: /*score*/ ctx[3] };
+    	score_1 = new Score({ props: score_1_props, $$inline: true });
+    	/*score_1_binding*/ ctx[12](score_1);
+    	let timer_1_props = { gameType: /*gameType*/ ctx[0] };
+    	timer_1 = new Timer({ props: timer_1_props, $$inline: true });
+    	/*timer_1_binding*/ ctx[13](timer_1);
+    	timer_1.$on("end", /*timerEnd*/ ctx[9]);
+    	let if_block = /*state*/ ctx[1] == /*STATE*/ ctx[7].GameOver && create_if_block$3(ctx);
+
+    	const block = {
+    		c: function create() {
+    			div3 = element("div");
+    			create_component(effects_1.$$.fragment);
+    			t0 = space();
+    			div0 = element("div");
+    			t1 = text(/*msg*/ ctx[2]);
+    			t2 = space();
+    			div1 = element("div");
+    			t3 = text("Score:\r\n    ");
+    			create_component(score_1.$$.fragment);
+    			t4 = space();
+    			create_component(timer_1.$$.fragment);
+    			t5 = space();
+    			div2 = element("div");
+    			div2.textContent = "X";
+    			t7 = space();
+    			if (if_block) if_block.c();
+    			attr_dev(div0, "class", "msg svelte-apdrzf");
+    			add_location(div0, file$8, 152, 2, 2820);
+    			attr_dev(div1, "class", "score svelte-apdrzf");
+    			add_location(div1, file$8, 153, 2, 2852);
+    			attr_dev(div2, "class", "backBtn svelte-apdrzf");
+    			add_location(div2, file$8, 158, 2, 3002);
+    			attr_dev(div3, "class", "game svelte-apdrzf");
+    			add_location(div3, file$8, 150, 0, 2744);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div3, anchor);
+    			mount_component(effects_1, div3, null);
+    			append_dev(div3, t0);
+    			append_dev(div3, div0);
+    			append_dev(div0, t1);
+    			append_dev(div3, t2);
+    			append_dev(div3, div1);
+    			append_dev(div1, t3);
+    			mount_component(score_1, div1, null);
+    			append_dev(div3, t4);
+    			mount_component(timer_1, div3, null);
+    			append_dev(div3, t5);
+    			append_dev(div3, div2);
+    			append_dev(div3, t7);
+    			if (if_block) if_block.m(div3, null);
+    			current = true;
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(div2, "click", /*click_handler*/ ctx[14], false, false, false),
+    					listen_dev(div3, "click", /*testHit*/ ctx[10], false, false, false)
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, [dirty]) {
+    			const effects_1_changes = {};
+    			effects_1.$set(effects_1_changes);
+    			if (!current || dirty & /*msg*/ 4) set_data_dev(t1, /*msg*/ ctx[2]);
+    			const score_1_changes = {};
+    			if (dirty & /*score*/ 8) score_1_changes.score = /*score*/ ctx[3];
+    			score_1.$set(score_1_changes);
+    			const timer_1_changes = {};
+    			if (dirty & /*gameType*/ 1) timer_1_changes.gameType = /*gameType*/ ctx[0];
+    			timer_1.$set(timer_1_changes);
+
+    			if (/*state*/ ctx[1] == /*STATE*/ ctx[7].GameOver) {
+    				if (if_block) {
+    					if_block.p(ctx, dirty);
+
+    					if (dirty & /*state*/ 2) {
+    						transition_in(if_block, 1);
+    					}
+    				} else {
+    					if_block = create_if_block$3(ctx);
+    					if_block.c();
+    					transition_in(if_block, 1);
+    					if_block.m(div3, null);
+    				}
+    			} else if (if_block) {
+    				group_outros();
+
+    				transition_out(if_block, 1, 1, () => {
+    					if_block = null;
+    				});
+
+    				check_outros();
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(effects_1.$$.fragment, local);
+    			transition_in(score_1.$$.fragment, local);
+    			transition_in(timer_1.$$.fragment, local);
+    			transition_in(if_block);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(effects_1.$$.fragment, local);
+    			transition_out(score_1.$$.fragment, local);
+    			transition_out(timer_1.$$.fragment, local);
+    			transition_out(if_block);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div3);
+    			/*effects_1_binding*/ ctx[11](null);
+    			destroy_component(effects_1);
+    			/*score_1_binding*/ ctx[12](null);
+    			destroy_component(score_1);
+    			/*timer_1_binding*/ ctx[13](null);
+    			destroy_component(timer_1);
+    			if (if_block) if_block.d();
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$9.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$9($$self, $$props, $$invalidate) {
+    	let $hitTarget;
+    	validate_store(hitTarget, "hitTarget");
+    	component_subscribe($$self, hitTarget, $$value => $$invalidate(18, $hitTarget = $$value));
+    	const STATE = { GetReady: 0, Playing: 1, GameOver: 2 };
+    	let gameType = "reaction";
+    	let state = STATE.GameOver;
+    	let msg;
+    	let score;
+    	let scoreComp;
+    	let timer;
+    	let onTimerEnd;
+    	let effects;
+    	let minHit = 2;
+    	let hitWait = 0;
+
+    	function newGame() {
+    		$$invalidate(3, score = 0);
+    		window.addEventListener("devicemotion", hit, true);
+    		scoreComp.reset();
+    		getReady();
+    	}
+
+    	function getReady() {
+    		$$invalidate(1, state = STATE.GetReady);
+    		$$invalidate(2, msg = "Get Ready!!");
+    		onTimerEnd = start;
+    		timer.setTime(1);
+    	}
+
+    	function start() {
+    		$$invalidate(1, state = STATE.Playing);
+    		$$invalidate(2, msg = "GO!!!");
+    		onTimerEnd = gameOver;
+    		timer.setTime(120);
+    	}
+
+    	function gameOver() {
+    		$$invalidate(1, state = STATE.GameOver);
+    		window.removeEventListener("devicemotion", hit, true);
+    	}
+
+    	function hit(event) {
+    		if (hitWait > 0) {
+    			hitWait--;
+    			return;
+    		}
+
+    		let x = event.acceleration.x;
+    		let y = event.acceleration.y;
+    		let z = event.acceleration.z;
+    		let hit = Math.sqrt(x * x + y * y + z * z); //movement vector length
+
+    		if (state == STATE.Playing) {
+    			hitWait = 15;
+    			if (hit < minHit) return;
+    			hit /= $hitTarget; //calibrate
+    			let scoreToAdd = hit * 100;
+    			$$invalidate(3, score += scoreToAdd);
+    			effects.spawnParticles(4, x, y);
+    			effects.flash(0.2, "255,255,255");
+    		}
+    	}
+
+    	function timerEnd() {
+    		onTimerEnd();
+    	}
+
+    	onMount(() => {
+    		newGame();
+    	});
+
+    	onDestroy(() => {
+    		gameOver();
+    	});
+
+    	function testHit() {
+    		let event = {
+    			acceleration: {
+    				x: Math.random() * 10 - 5,
+    				y: Math.random() * 10 - 5,
+    				z: Math.random() * 10 - 5
+    			}
+    		};
+
+    		hit(event);
+    		hitWait = 0;
+    	}
+
+    	const writable_props = [];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Reaction> was created with unknown prop '${key}'`);
+    	});
+
+    	let { $$slots = {}, $$scope } = $$props;
+    	validate_slots("Reaction", $$slots, []);
+
+    	function effects_1_binding($$value) {
+    		binding_callbacks[$$value ? "unshift" : "push"](() => {
+    			effects = $$value;
+    			$$invalidate(6, effects);
+    		});
+    	}
+
+    	function score_1_binding($$value) {
+    		binding_callbacks[$$value ? "unshift" : "push"](() => {
+    			scoreComp = $$value;
+    			$$invalidate(4, scoreComp);
+    		});
+    	}
+
+    	function timer_1_binding($$value) {
+    		binding_callbacks[$$value ? "unshift" : "push"](() => {
+    			timer = $$value;
+    			$$invalidate(5, timer);
+    		});
+    	}
+
+    	const click_handler = () => pop();
+
+    	function gameover_gameType_binding(value) {
+    		gameType = value;
+    		$$invalidate(0, gameType);
+    	}
+
+    	$$self.$capture_state = () => ({
+    		onMount,
+    		onDestroy,
+    		pop,
+    		Timer,
+    		hitTarget,
+    		Score,
+    		GameOver,
+    		Effects,
+    		STATE,
+    		gameType,
+    		state,
+    		msg,
+    		score,
+    		scoreComp,
+    		timer,
+    		onTimerEnd,
+    		effects,
+    		minHit,
+    		hitWait,
+    		newGame,
+    		getReady,
+    		start,
+    		gameOver,
+    		hit,
+    		timerEnd,
+    		testHit,
+    		$hitTarget
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ("gameType" in $$props) $$invalidate(0, gameType = $$props.gameType);
+    		if ("state" in $$props) $$invalidate(1, state = $$props.state);
+    		if ("msg" in $$props) $$invalidate(2, msg = $$props.msg);
+    		if ("score" in $$props) $$invalidate(3, score = $$props.score);
+    		if ("scoreComp" in $$props) $$invalidate(4, scoreComp = $$props.scoreComp);
+    		if ("timer" in $$props) $$invalidate(5, timer = $$props.timer);
+    		if ("onTimerEnd" in $$props) onTimerEnd = $$props.onTimerEnd;
+    		if ("effects" in $$props) $$invalidate(6, effects = $$props.effects);
+    		if ("minHit" in $$props) minHit = $$props.minHit;
+    		if ("hitWait" in $$props) hitWait = $$props.hitWait;
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [
+    		gameType,
+    		state,
+    		msg,
+    		score,
+    		scoreComp,
+    		timer,
+    		effects,
+    		STATE,
+    		newGame,
+    		timerEnd,
+    		testHit,
+    		effects_1_binding,
+    		score_1_binding,
+    		timer_1_binding,
+    		click_handler,
+    		gameover_gameType_binding
+    	];
+    }
+
+    class Reaction extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$9, create_fragment$9, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Reaction",
+    			options,
+    			id: create_fragment$9.name
+    		});
+    	}
+    }
+
     const routes = {
         '/': Menu,
         '/game': NormalGame,
         '/calibrate': Calibrate,
         '/freestyle': Freestle,
+        '/reaction': Reaction,
     };
 
     /* src\App.svelte generated by Svelte v3.23.2 */
-    const file$8 = "src\\App.svelte";
+    const file$9 = "src\\App.svelte";
 
-    function create_fragment$9(ctx) {
+    function create_fragment$a(ctx) {
     	let router;
     	let t;
     	let img;
@@ -3717,7 +4177,7 @@ var app = (function () {
     			attr_dev(img, "class", "fullScreenBtn svelte-d9ka2e");
     			if (img.src !== (img_src_value = "../images/full_screen_icon.svg")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "full screen button");
-    			add_location(img, file$8, 75, 0, 1516);
+    			add_location(img, file$9, 75, 0, 1516);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -3754,7 +4214,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$9.name,
+    		id: create_fragment$a.name,
     		type: "component",
     		source: "",
     		ctx
@@ -3763,7 +4223,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$9($$self, $$props, $$invalidate) {
+    function instance$a($$self, $$props, $$invalidate) {
     	let $location;
     	validate_store(location, "location");
     	component_subscribe($$self, location, $$value => $$invalidate(2, $location = $$value));
@@ -3825,13 +4285,13 @@ var app = (function () {
     class App extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$9, create_fragment$9, safe_not_equal, {});
+    		init(this, options, instance$a, create_fragment$a, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "App",
     			options,
-    			id: create_fragment$9.name
+    			id: create_fragment$a.name
     		});
     	}
     }
