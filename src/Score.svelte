@@ -67,6 +67,7 @@
       2px 0px 1px red, 0px 8px 1px #9f0000;
     transition: transform 0.25s cubic-bezier(0.25, 1.73, 0.7, -0.8),
       opacity 0.2s;
+    opacity: 0;
   }
 </style>
 

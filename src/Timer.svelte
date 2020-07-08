@@ -79,6 +79,11 @@
     margin-top: 20px;
   }
 
+  .reaction {
+    position: relative;
+    margin-top: 20px;
+  }
+
   @media screen and (max-height: 460px) {
     .timer {
       position: fixed;
@@ -88,7 +93,10 @@
   }
 </style>
 
-<div class="timer" class:freestyle={gameType == 'freestyle'}>
+<div
+  class="timer"
+  class:freestyle={gameType == 'freestyle'}
+  class:reaction={gameType == 'reaction'}>
   <div class="timerSeconds">{time}</div>
   <svg width="110" height="110">
     <circle
