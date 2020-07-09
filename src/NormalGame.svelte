@@ -24,7 +24,6 @@
   let scoreComp;
   let timer;
   let onTimerEnd;
-  let timerHidden = false;
   let combo = 0;
   let comboTimout;
 
@@ -46,18 +45,18 @@
     hpBar.style.width = "100%";
     hpColor.style.backgroundColor = "#62ff00";
     window.addEventListener("devicemotion", hit, true);
-    getReady();
+    getReady(3);
     scoreComp.reset();
   }
 
-  function getReady() {
+  function getReady(seconds) {
     state = STATE.GetReady;
     msg = "Get Ready!!";
     hpBar.style.width = "100%";
     hpColor.style.backgroundColor = "#62ff00";
     onTimerEnd = nextLevel;
     level++;
-    timer.setTime(2);
+    timer.setTime(seconds);
   }
 
   function nextLevel() {
@@ -67,7 +66,7 @@
     hp = maxHp;
     msg = "GO!!!";
     onTimerEnd = gameOver;
-    timer.setTime(10 + (level - 1) * 3);
+    timer.setTime(30 + (level - 1) * 3);
   }
 
   function gameOver() {
@@ -133,7 +132,7 @@
       }
 
       if (hp == 0) {
-        getReady();
+        getReady(10 + level * 3);
       }
     }
   }

@@ -103,9 +103,9 @@
   <div class="items">
     <div class="item" on:click={() => push('/game')}>Normal</div>
     <div class="item" on:click={() => push('/freestyle')}>Free Style</div>
-    <div class="item" on:click={() => push('/reaction')}>Reaction</div>
+    <!-- <div class="item" on:click={() => push('/reaction')}>Reaction</div> -->
     <div class="item" on:click={() => push('/calibrate')}>Calibrate</div>
-    <div class="item" on:click={() => push('/options')}>Options</div>
+    <!-- <div class="item" on:click={() => push('/options')}>Options</div> -->
   </div>
   <hr />
 </div>

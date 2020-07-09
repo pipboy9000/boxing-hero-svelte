@@ -141,21 +141,43 @@
     text-shadow: 0px 5px 5px black;
   }
 
-  @media screen and (max-height: 460px) {
-    .score {
-      margin-top: 15px;
-    }
+  .targetContainer {
+    width: 50vh;
+    height: 50vh;
+    max-width: 50vw;
+    max-height: 50vw;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .target {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 430px;
+    background: #00ff08;
+  }
+
+  .color {
   }
 </style>
 
 <div class="game" on:click={testHit}>
   <Effects bind:this={effects} />
   <div class="msg">{msg}</div>
+  <div class="targetContainer">
+    <Timer {gameType} bind:this={timer} on:end={timerEnd} />
+    <div class="target" />
+    <div class="color" />
+  </div>
   <div class="score">
     Score:
     <Score {score} bind:this={scoreComp} />
   </div>
-  <Timer {gameType} bind:this={timer} on:end={timerEnd} />
   <div class="backBtn" on:click={() => pop()}>X</div>
   {#if state == STATE.GameOver}
     <GameOver on:restart={newGame} bind:gameType {score} />

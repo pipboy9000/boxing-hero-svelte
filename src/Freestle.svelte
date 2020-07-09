@@ -45,14 +45,14 @@
     state = STATE.GetReady;
     msg = "Get Ready!!";
     onTimerEnd = start;
-    timer.setTime(1);
+    timer.setTime(3);
   }
 
   function start() {
     state = STATE.Playing;
     msg = "GO!!!";
     onTimerEnd = gameOver;
-    timer.setTime(10);
+    timer.setTime(120);
   }
 
   function gameOver() {

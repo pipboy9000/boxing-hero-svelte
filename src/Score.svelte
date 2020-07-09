@@ -2,7 +2,7 @@
   import { onMount, onDestroy } from "svelte";
 
   export let score;
-  export let combo;
+  export let combo = 0;
 
   let currentScore = 0;
   let active = false;

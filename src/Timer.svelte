@@ -74,22 +74,24 @@
     transition: opacity 0.5s;
   }
 
-  .freestyle {
-    position: relative;
-    margin-top: 20px;
-  }
-
-  .reaction {
-    position: relative;
-    margin-top: 20px;
-  }
-
   @media screen and (max-height: 460px) {
     .timer {
       position: fixed;
       left: 20px;
       top: 20px;
     }
+  }
+
+  .reaction {
+    position: relative;
+    z-index: 1;
+    left: 0px;
+    top: 0px;
+  }
+
+  .freestyle {
+    position: relative;
+    margin-top: 20px;
   }
 </style>
 
@@ -98,6 +100,7 @@
   class:freestyle={gameType == 'freestyle'}
   class:reaction={gameType == 'reaction'}>
   <div class="timerSeconds">{time}</div>
+  <!-- <svg viewBox="0 0 110 110" preserveAspectRatio="xMidYMid meet"> -->
   <svg width="110" height="110">
     <circle
       bind:this={circle}
