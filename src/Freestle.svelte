@@ -13,8 +13,6 @@
     GameOver: 2
   };
 
-  let gameType = "freestyle";
-
   let state = STATE.GameOver;
 
   let msg;
@@ -148,14 +146,6 @@
     text-shadow: 0 5px 3px black;
   }
 
-  .backBtn {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 30px;
-    color: white;
-  }
-
   .score {
     font-size: 30px;
     color: white;
@@ -163,9 +153,21 @@
     text-shadow: 0px 5px 5px black;
   }
 
+  .timer {
+    max-height: 200px;
+  }
+
   @media screen and (max-height: 460px) {
     .score {
       margin-top: 15px;
+    }
+
+    .timer {
+      position: fixed;
+      left: 20px;
+      top: 20px;
+      width: 100px;
+      height: 100px;
     }
   }
 </style>
@@ -177,9 +179,10 @@
     Score:
     <Score {score} bind:this={scoreComp} {combo} />
   </div>
-  <Timer {gameType} bind:this={timer} on:end={timerEnd} />
-  <div class="backBtn" on:click={() => pop()}>X</div>
+  <div class="timer">
+    <Timer bind:this={timer} on:end={timerEnd} />
+  </div>
   {#if state == STATE.GameOver}
-    <GameOver on:restart={newGame} bind:gameType {score} />
+    <GameOver on:restart={newGame} {score} />
   {/if}
 </div>

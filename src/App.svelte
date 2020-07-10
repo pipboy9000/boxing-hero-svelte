@@ -5,9 +5,14 @@
   import { push, pop, replace, location } from "svelte-spa-router";
 
   let isFullScreen;
+  let page;
+
+  location.subscribe(l => {
+    page = l.split("/")[1];
+  });
 
   onMount(async () => {
-    let page = $location.split("/")[1];
+    page = $location.split("/")[1];
     if (page) {
       await replace("/");
       push("/" + page);
@@ -69,6 +74,16 @@
     width: 40px;
     background: #0d0d0d87;
     border-radius: 3px;
+    z-index: 9999;
+  }
+
+  .backBtn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 30px;
+    color: white;
+    z-index: 9999;
   }
 </style>
 
@@ -78,3 +93,6 @@
   class="fullScreenBtn"
   src="../images/full_screen_icon.svg"
   alt="full screen button" />
+{#if page}
+  <div class="backBtn" on:click={() => pop()}>X</div>
+{/if}

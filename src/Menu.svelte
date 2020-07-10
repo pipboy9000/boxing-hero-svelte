@@ -18,7 +18,6 @@
     align-items: center;
     flex-direction: column;
     width: 100%;
-    height: 100%;
     max-height: 50vh;
     max-width: 330px;
     overflow: auto;
@@ -103,7 +102,7 @@
   <div class="items">
     <div class="item" on:click={() => push('/game')}>Normal</div>
     <div class="item" on:click={() => push('/freestyle')}>Free Style</div>
-    <!-- <div class="item" on:click={() => push('/reaction')}>Reaction</div> -->
+    <div class="item" on:click={() => push('/reaction')}>Reaction</div>
     <div class="item" on:click={() => push('/calibrate')}>Calibrate</div>
     <!-- <div class="item" on:click={() => push('/options')}>Options</div> -->
   </div>

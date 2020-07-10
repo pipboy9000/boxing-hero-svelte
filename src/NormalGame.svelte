@@ -219,6 +219,8 @@
     justify-content: center;
     align-items: center;
     display: flex;
+    position: relative;
+    max-width: 200px;
   }
 
   .hpColor {
@@ -237,14 +239,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  }
-
-  .backBtn {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 30px;
-    color: white;
   }
 
   .bottom {
@@ -281,19 +275,21 @@
     mix-blend-mode: overlay;
   }
 
-  @media screen and (max-height: 460px) {
-    .middle {
-      height: 0;
-    }
-
-    .score {
-      margin-top: 15px;
-    }
+  .timer {
+    margin-top: 20px;
   }
 
-  @media screen and (max-height: 315px) {
-    .bottom {
-      margin-top: 0;
+  @media screen and (max-height: 520px) {
+    .timer {
+      position: fixed;
+      left: 20px;
+      top: 20px;
+      width: 100px;
+      height: 100px;
+    }
+
+    .middle {
+      height: 0;
     }
   }
 </style>
@@ -309,7 +305,9 @@
     </div>
   </div>
   <div class="middle">
-    <Timer bind:this={timer} on:end={timerEnd} />
+    <div class="timer">
+      <Timer bind:this={timer} on:end={timerEnd} />
+    </div>
   </div>
   <div class="bottom">
     <div class="hpContainer">
@@ -319,7 +317,6 @@
       </div>
     </div>
   </div>
-  <div class="backBtn" on:click={() => pop()}>X</div>
   {#if state == STATE.GameOver}
     <GameOver on:restart={newGame} bind:gameType {score} />
   {/if}

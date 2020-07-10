@@ -3,8 +3,6 @@
   import { onMount } from "svelte";
   import { tick } from "svelte";
 
-  export let gameType = "normal";
-
   const dispatch = createEventDispatcher();
 
   let time = 0;
@@ -51,12 +49,18 @@
 
 <style>
   .timer {
-    position: absolute;
     color: white;
     font-size: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
   }
 
   .timerSeconds {
@@ -73,35 +77,12 @@
     stroke: white;
     transition: opacity 0.5s;
   }
-
-  @media screen and (max-height: 460px) {
-    .timer {
-      position: fixed;
-      left: 20px;
-      top: 20px;
-    }
-  }
-
-  .reaction {
-    position: relative;
-    z-index: 1;
-    left: 0px;
-    top: 0px;
-  }
-
-  .freestyle {
-    position: relative;
-    margin-top: 20px;
-  }
 </style>
 
-<div
-  class="timer"
-  class:freestyle={gameType == 'freestyle'}
-  class:reaction={gameType == 'reaction'}>
+<div class="timer">
   <div class="timerSeconds">{time}</div>
-  <!-- <svg viewBox="0 0 110 110" preserveAspectRatio="xMidYMid meet"> -->
-  <svg width="110" height="110">
+  <svg viewBox="0 0 110 110" preserveAspectRatio="xMidYMid meet">
+    <!-- <svg width="110" height="110"> -->
     <circle
       bind:this={circle}
       class="timerCircle"

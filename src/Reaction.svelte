@@ -31,7 +31,6 @@
   function newGame() {
     score = 0;
     window.addEventListener("devicemotion", hit, true);
-    scoreComp.reset();
     getReady();
   }
 
@@ -126,21 +125,6 @@
     text-shadow: 0 5px 3px black;
   }
 
-  .backBtn {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 30px;
-    color: white;
-  }
-
-  .score {
-    font-size: 30px;
-    color: white;
-    text-align: center;
-    text-shadow: 0px 5px 5px black;
-  }
-
   .targetContainer {
     width: 50vh;
     height: 50vh;
@@ -160,25 +144,31 @@
     right: 0;
     border-radius: 430px;
     background: #00ff08;
+    /* background-image: url("../images/glove.png");
+    background-size: contain;
+    background-position: center; */
   }
 
+  .timer {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    z-index: 999;
+  }
   .color {
   }
 </style>
 
 <div class="game" on:click={testHit}>
-  <Effects bind:this={effects} />
   <div class="msg">{msg}</div>
   <div class="targetContainer">
-    <Timer {gameType} bind:this={timer} on:end={timerEnd} />
+    <div class="timer">
+      <Timer bind:this={timer} on:end={timerEnd} />
+    </div>
     <div class="target" />
     <div class="color" />
   </div>
-  <div class="score">
-    Score:
-    <Score {score} bind:this={scoreComp} />
-  </div>
-  <div class="backBtn" on:click={() => pop()}>X</div>
+  <Effects bind:this={effects} />
   {#if state == STATE.GameOver}
     <GameOver on:restart={newGame} bind:gameType {score} />
   {/if}

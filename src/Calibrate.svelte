@@ -149,14 +149,6 @@
     width: 60%;
     font-size: 5px;
   }
-
-  .backBtn {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 30px;
-    color: white;
-  }
 </style>
 
 <div class="calibrate" on:click={testHit}>
@@ -174,12 +166,5 @@
       on:change={setHitTarget}
       bind:this={slider} />
     +
-  </div>
-  <div
-    class="backBtn"
-    on:click={() => {
-      pop();
-    }}>
-    X
   </div>
 </div>
