@@ -2,8 +2,7 @@
   import { onMount, onDestroy } from "svelte";
   import { pop } from "svelte-spa-router";
   import Timer from "./Timer.svelte";
-  import { hitTarget } from "./store.js";
-  import Score from "./Score.svelte";
+  // import { hitTarget } from "./store.js";
   import GameOver from "./GameOver.svelte";
   import Effects from "./Effects.svelte";
 
@@ -19,7 +18,6 @@
 
   let msg;
   let score;
-  let scoreComp;
   let timer;
   let onTimerEnd;
 
@@ -27,6 +25,11 @@
 
   let minHit = 2;
   let hitWait = 0;
+
+  let targetState = false; //red when false, green when true
+  let nextGreenTimeout;
+  let nextRedTimeout;
+  let greenTime;
 
   function newGame() {
     score = 0;
@@ -46,6 +49,23 @@
     msg = "GO!!!";
     onTimerEnd = gameOver;
     timer.setTime(120);
+    nextRed();
+  }
+
+  function nextRed() {
+    if (nextRedTimeout) clearTimeout(nextRedTimeout);
+    targetState = false;
+    let wait = 1 + Math.random() * 2.5;
+    console.log(wait);
+    nextGreenTimeout = setTimeout(nextGreen, wait * 1000);
+  }
+
+  function nextGreen() {
+    if (nextGreenTimeout) clearTimeout(nextGreenTimeout);
+    targetState = true;
+    greenTime = performance.now();
+    let wait = 1.5;
+    nextRedTimeout = setTimeout(nextRed, wait * 1000);
   }
 
   function gameOver() {
@@ -70,10 +90,19 @@
 
       if (hit < minHit) return;
 
-      hit /= $hitTarget; //calibrate
+      // hit /= $hitTarget; //calibrate
 
-      let scoreToAdd = hit * 100;
-      score += scoreToAdd;
+      if (targetState) {
+        //target is green;
+        let addToScore =
+          ((1500 - (performance.now() - greenTime)) / 1500) * 150;
+        console.log(addToScore);
+        score += addToScore;
+        nextRed();
+      } else {
+        //target is red;
+        score -= 100;
+      }
 
       effects.spawnParticles(4, x, y);
 
@@ -143,7 +172,6 @@
     left: 0;
     right: 0;
     border-radius: 430px;
-    background: #00ff08;
     /* background-image: url("../images/glove.png");
     background-size: contain;
     background-position: center; */
@@ -155,18 +183,26 @@
     padding: 10px;
     z-index: 999;
   }
-  .color {
+  .green {
+    background: #00ff08;
+    box-shadow: 0 0 50px 5px #20ff20;
+  }
+
+  .red {
+    background: #ff2020;
+    box-shadow: 0 0 50px 5px red;
   }
 </style>
 
 <div class="game" on:click={testHit}>
   <div class="msg">{msg}</div>
+  <div class="score">Score: {Math.round(score)}</div>
   <div class="targetContainer">
     <div class="timer">
       <Timer bind:this={timer} on:end={timerEnd} />
     </div>
-    <div class="target" />
-    <div class="color" />
+    <div class="target" class:green={targetState} class:red={!targetState} />
+    <div class="green" />
   </div>
   <Effects bind:this={effects} />
   {#if state == STATE.GameOver}

@@ -220,7 +220,7 @@
     align-items: center;
     display: flex;
     position: relative;
-    max-width: 200px;
+    max-width: 35vh;
   }
 
   .hpColor {
@@ -279,7 +279,7 @@
     margin-top: 20px;
   }
 
-  @media screen and (max-height: 520px) {
+  @media screen and (max-height: 460px) {
     .timer {
       position: fixed;
       left: 20px;
@@ -290,6 +290,11 @@
 
     .middle {
       height: 0;
+    }
+  }
+  @media screen and (max-width: 610px) and (max-height: 460px) {
+    .msg {
+      font-size: 40px;
     }
   }
 </style>
