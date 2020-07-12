@@ -170,6 +170,12 @@
       height: 100px;
     }
   }
+
+  @media screen and (max-width: 610px) and (max-height: 410px) {
+    .msg {
+      font-size: 40px;
+    }
+  }
 </style>
 
 <div class="game" on:click={testHit}>

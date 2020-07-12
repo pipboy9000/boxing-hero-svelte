@@ -18,6 +18,7 @@
 
   let msg;
   let score;
+  let scoreAnimText;
   let timer;
   let onTimerEnd;
 
@@ -55,8 +56,7 @@
   function nextRed() {
     if (nextRedTimeout) clearTimeout(nextRedTimeout);
     targetState = false;
-    let wait = 1 + Math.random() * 2.5;
-    console.log(wait);
+    let wait = 0.3 + Math.random() * 2;
     nextGreenTimeout = setTimeout(nextGreen, wait * 1000);
   }
 
@@ -64,7 +64,7 @@
     if (nextGreenTimeout) clearTimeout(nextGreenTimeout);
     targetState = true;
     greenTime = performance.now();
-    let wait = 1.5;
+    let wait = 1.2;
     nextRedTimeout = setTimeout(nextRed, wait * 1000);
   }
 
@@ -92,17 +92,21 @@
 
       // hit /= $hitTarget; //calibrate
 
+      let addToScore;
+
       if (targetState) {
         //target is green;
-        let addToScore =
-          ((1500 - (performance.now() - greenTime)) / 1500) * 150;
+        addToScore = ((1500 - (performance.now() - greenTime)) / 1500) * 150;
         console.log(addToScore);
-        score += addToScore;
         nextRed();
       } else {
         //target is red;
-        score -= 100;
+        addToScore = -100;
       }
+
+      score += addToScore;
+
+      popScore(addToScore);
 
       effects.spawnParticles(4, x, y);
 
@@ -112,6 +116,14 @@
 
   function timerEnd() {
     onTimerEnd();
+  }
+
+  function popScore(s) {
+    scoreAnimText.innerHTML = Math.round(s);
+    scoreAnimText.classList.remove("scoreAnim");
+    setTimeout(() => {
+      scoreAnimText.classList.add("scoreAnim");
+    }, 10);
   }
 
   onMount(() => {
@@ -154,6 +166,12 @@
     text-shadow: 0 5px 3px black;
   }
 
+  .score {
+    color: white;
+    font-size: 50px;
+    margin: 20px;
+  }
+
   .targetContainer {
     width: 50vh;
     height: 50vh;
@@ -172,9 +190,6 @@
     left: 0;
     right: 0;
     border-radius: 430px;
-    /* background-image: url("../images/glove.png");
-    background-size: contain;
-    background-position: center; */
   }
 
   .timer {
@@ -192,10 +207,45 @@
     background: #ff2020;
     box-shadow: 0 0 50px 5px red;
   }
+
+  .scorePop {
+    position: absolute;
+    z-index: 99999;
+    opacity: 0;
+    transform: translateY(50px);
+    color: white;
+    font-size: 70px;
+    font-family: "Rubik", sans-serif;
+    text-shadow: 0 10px 0 #00000073;
+  }
+
+  :global(.scoreAnim) {
+    animation: scoreAnim 1s linear;
+  }
+
+  @keyframes scoreAnim {
+    0% {
+      transform: translateY(50px);
+      opacity: 0;
+    }
+    50% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+    85% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(0px);
+      opacity: 0;
+    }
+  }
 </style>
 
 <div class="game" on:click={testHit}>
   <div class="msg">{msg}</div>
+  <div class="scorePop" bind:this={scoreAnimText}>+125</div>
   <div class="score">Score: {Math.round(score)}</div>
   <div class="targetContainer">
     <div class="timer">
