@@ -42,7 +42,7 @@
     state = STATE.GetReady;
     msg = "Get Ready!!";
     onTimerEnd = start;
-    timer.setTime(1);
+    timer.setTime(3);
   }
 
   function start() {
@@ -71,6 +71,8 @@
   function gameOver() {
     state = STATE.GameOver;
     window.removeEventListener("devicemotion", hit, true);
+    clearTimeout(nextRedTimeout);
+    clearTimeout(nextGreenTimeout);
   }
 
   function hit(event) {
@@ -244,7 +246,7 @@
   }
 </style>
 
-<div class="game" on:click={testHit}>
+<div class="game" on:mousedown={testHit}>
   <div class="msg">{msg}</div>
   <div class="scorePop" bind:this={scoreAnimText}>+125</div>
   <div class="score">Score: {Math.round(score)}</div>
