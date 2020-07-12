@@ -216,7 +216,8 @@
     color: white;
     font-size: 70px;
     font-family: "Rubik", sans-serif;
-    text-shadow: 0 10px 0 #00000073;
+    text-shadow: 0 8px 2px #00000073, 0 0px 3px #000000;
+    pointer-events: none;
   }
 
   :global(.scoreAnim) {
