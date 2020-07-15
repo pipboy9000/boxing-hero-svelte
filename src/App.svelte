@@ -92,6 +92,7 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, black, #ffffff0d, black);
+    pointer-events: none;
   }
 </style>
 
