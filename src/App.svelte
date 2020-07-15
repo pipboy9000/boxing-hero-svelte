@@ -33,7 +33,8 @@
 <style>
   :global(body) {
     background: url("../images/leather.jpg");
-    background-size: contain;
+    background-repeat: repeat;
+    background-size: 300px;
     background-position: center;
     display: flex;
     align-items: center;
@@ -85,8 +86,16 @@
     color: white;
     z-index: 9999;
   }
+
+  .gradientOverlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, black, #ffffff0d, black);
+  }
 </style>
 
+<div class="gradientOverlay" />
 <Router {routes} />
 <img
   on:click={fullScreen}

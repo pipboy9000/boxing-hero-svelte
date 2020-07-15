@@ -26,13 +26,14 @@
   }
 
   .logo {
-    background-image: url("../images/logo.png");
+    background-image: url("../images/logo.svg");
     width: 90%;
     height: 40%;
     max-width: 860px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    filter: drop-shadow(0px 15px 6px black);
   }
 
   .item {
